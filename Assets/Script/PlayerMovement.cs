@@ -13,8 +13,11 @@ public class PlayerMovement : MonoBehaviour
     private bool moving;
 
     private bool isClicked;
+    
+    public Vector3 respawnPoint;
 
     //public Animator myAnim;
+
 
     private void Update()
     {
@@ -44,4 +47,5 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-}
+    
+    }

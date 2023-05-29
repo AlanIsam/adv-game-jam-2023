@@ -1,17 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
 {
     public float radius = 5f;
     [Range(1,360)]public float angle = 45f;
-    
+
     public LayerMask targetLayer;
     public LayerMask obstacleLayer;
     
     public GameObject Player;
+    public HealthSystem playerHealth;
     
     public bool canSeePlayer { get; private set; }
     
@@ -20,7 +22,8 @@ public class FieldOfView : MonoBehaviour
      {
       Player = GameObject.FindGameObjectWithTag("Player");
      StartCoroutine(FOVCheck());
-    }
+     StartCoroutine(PlayerDeath());
+     }
 
      private IEnumerator FOVCheck()
      {
@@ -32,6 +35,21 @@ public class FieldOfView : MonoBehaviour
       }
      }
 
+     private IEnumerator PlayerDeath()
+     {
+      WaitForSeconds wait = new WaitForSeconds(1f);
+      while (true)
+      {
+       yield return wait;
+       if (canSeePlayer)
+       {
+        playerHealth.TakeDamage(1);
+       }
+      }
+     }
+     
+     
+
      private void FOV()
      {
       Collider2D[] rangeChecks = Physics2D.OverlapCircleAll(transform.position, radius, targetLayer);
@@ -42,13 +60,13 @@ public class FieldOfView : MonoBehaviour
 
        if (Vector2.Angle(transform.up, directionToTarget) < angle / 2)
        {
-        float distanceToTarget = Vector2.Distance(transform.position, target.position); 
-        
-        if(!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleLayer))
-           canSeePlayer = true;
+        float distanceToTarget = Vector2.Distance(transform.position, target.position);
+
+        if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleLayer))
+         canSeePlayer = true;
         else
-           canSeePlayer = false;
-        
+         canSeePlayer = false;
+
        }
        else
           canSeePlayer = false;
@@ -56,7 +74,11 @@ public class FieldOfView : MonoBehaviour
       }
       else if (canSeePlayer)
          canSeePlayer = false;
+      
+
      }
+
+     
 
      private void OnDrawGizmos()
      {
@@ -74,6 +96,7 @@ public class FieldOfView : MonoBehaviour
       {
        Gizmos.color = Color.green;
        Gizmos.DrawLine(transform.position, Player.transform.position);
+       PlayerDeath();
       }
      }
   
@@ -84,4 +107,6 @@ public class FieldOfView : MonoBehaviour
       angleInDegree += eulerY;
       return new Vector2(Mathf.Sin(angleInDegree * Mathf.Deg2Rad), Mathf.Cos(angleInDegree * Mathf.Deg2Rad));
      }
+     
+
 }
