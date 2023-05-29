@@ -21,6 +21,11 @@ public class EnemypatrolX : MonoBehaviour
         if (transform.position.x < startingX || transform.position.x > startingX + range)
         {
             dir *= -1;
+          //rotate the enemy when it changes direction
+            transform.Rotate(0f, 0f, 90f);
+            
+              
+
         }
     }
 }

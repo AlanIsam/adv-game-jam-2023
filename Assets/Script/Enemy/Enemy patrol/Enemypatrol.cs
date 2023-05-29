@@ -21,6 +21,7 @@ public class Enemypatrol : MonoBehaviour
         if (transform.position.y < startingY || transform.position.y > startingY + range)
         {
             dir *= -1;
+            transform.Rotate(0f, 0f, 90f);
         }
     }
 }
