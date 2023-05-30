@@ -10,13 +10,14 @@ public class HealthSystem : MonoBehaviour
     public GameObject deathscreen;
     public GameObject player;
     public GameObject playerSFX;
-    
+
     public Vector3 respawnPoint;
 
 
     private void Start()
     {
-        respawnPoint = transform.position;
+        respawnPoint = player.transform.position;
+        
     }
 
     void Update()
@@ -66,5 +67,12 @@ public class HealthSystem : MonoBehaviour
     public void Respawn()
     {
         player.transform.position = respawnPoint;
+        isDead = false;
+        player.SetActive(true);
+        deathscreen.SetActive(false);
+        Time.timeScale = 1;
+        playerSFX.SetActive(false);
+        life = 3;
+
     }
 }
