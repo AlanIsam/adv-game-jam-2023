@@ -10,13 +10,17 @@ public class HealthSystem : MonoBehaviour
     public GameObject deathscreen;
     public GameObject player;
     public GameObject playerSFX;
+    public HealthBar healthBar;
+    public int currentHealth;
 
     public Vector3 respawnPoint;
 
 
     private void Start()
     {
+        currentHealth = life;
         respawnPoint = player.transform.position;
+        healthBar.SetMaxHealth(life);
         
     }
 
@@ -40,11 +44,12 @@ public class HealthSystem : MonoBehaviour
             return;
         }
 
-        if (life >= 1)
+        if (currentHealth >= 1)
         {
 
-            life -= damage;
-            if (life < 1)
+            currentHealth -= damage;
+            healthBar.SetHealth(currentHealth);
+            if (currentHealth < 1)
             {
                 isDead = true;
 
@@ -72,7 +77,8 @@ public class HealthSystem : MonoBehaviour
         deathscreen.SetActive(false);
         Time.timeScale = 1;
         playerSFX.SetActive(false);
-        life = 3;
+        currentHealth = life;
+        healthBar.SetHealth(currentHealth);
 
     }
 }
