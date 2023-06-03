@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     
     public Vector3 respawnPoint;
 
-    //public Animator myAnim;
+    public Animator myAnim;
 
 
     private void Update()
@@ -38,12 +38,13 @@ public class PlayerMovement : MonoBehaviour
         {
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, lastClickedPos, step);
-
+            myAnim.Play("Idle");
         }
         else
         {
             moving = false;
            // myAnim.SetBool("Run", false);
+           myAnim.Play("Run");
         }
 
     }
