@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator myAnim;
 
+    public bool isFacingLeft;
+
 
     private void Update()
     {
@@ -39,6 +41,14 @@ public class PlayerMovement : MonoBehaviour
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, lastClickedPos, step);
             myAnim.Play("Idle");
+            if (transform.position.x > lastClickedPos.x && !isFacingLeft)
+            {
+                Flip();
+            }
+            else if (transform.position.x < lastClickedPos.x && isFacingLeft)
+            {
+                Flip();
+            }
         }
         else
         {
@@ -46,7 +56,17 @@ public class PlayerMovement : MonoBehaviour
            // myAnim.SetBool("Run", false);
            myAnim.Play("Run");
         }
+        
+        
 
+    }
+
+    void Flip()
+    {
+        Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        transform.localScale = currentScale;
+        isFacingLeft = !isFacingLeft;
     }
     
     }
