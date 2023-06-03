@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -16,7 +17,12 @@ public class PlayerMovement : MonoBehaviour
     
     public Vector3 respawnPoint;
 
+<<<<<<< Updated upstream
     //public Animator myAnim;
+=======
+    public Animator myAnim;
+    public bool facingLeft;
+>>>>>>> Stashed changes
 
 
     private void Update()
@@ -38,6 +44,19 @@ public class PlayerMovement : MonoBehaviour
         {
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, lastClickedPos, step);
+<<<<<<< Updated upstream
+=======
+            myAnim.Play("Idle");
+              if (transform.position.x > lastClickedPos.x && !facingLeft)
+                {
+                    Flip();
+                }
+                else if (transform.position.x < lastClickedPos.x && facingLeft)
+                {
+                    Flip();
+                }
+            
+>>>>>>> Stashed changes
 
         }
         else
@@ -47,5 +66,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-    
+
+    void Flip()
+    {
+      Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale;
+        facingLeft = !facingLeft;
     }
+
+ 
+
+}
