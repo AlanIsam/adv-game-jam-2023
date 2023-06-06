@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Font.meta
 guid: 8d9b57ab2206a74459ae5c2c091c31c0
 folderAsset: yes
+========
+guid: 86f0d6012e0c2ef4082d266a83fe41ff
+>>>>>>>> Stashed changes:Assets/Scenes/strauss2.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
