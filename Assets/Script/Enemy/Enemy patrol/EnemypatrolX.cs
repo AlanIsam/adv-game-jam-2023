@@ -9,6 +9,7 @@ public class EnemypatrolX : MonoBehaviour
 
     private float startingX;
     int dir = 1;
+    public bool isFacingLeft;
 
     void Start()
     {
@@ -18,14 +19,30 @@ public class EnemypatrolX : MonoBehaviour
     private void FixedUpdate()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime *dir);
+
         if (transform.position.x < startingX || transform.position.x > startingX + range)
         {
             dir *= -1;
           //rotate the enemy when it changes direction
-            transform.Rotate(0f, 0f, 90f);
-            
-              
+          if (!isFacingLeft)
+        
+              Flip();
+        
+          else
+        
+              Flip();
+
+
 
         }
+
+    }
+
+    public void Flip()
+    {
+        Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        transform.localScale = currentScale;
+        isFacingLeft = !isFacingLeft;
     }
 }
