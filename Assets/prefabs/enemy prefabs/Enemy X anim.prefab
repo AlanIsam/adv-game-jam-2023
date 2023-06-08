@@ -268,9 +268,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -796504641
+  m_SortingLayer: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -1014535295, guid: 245b424aa37dd7c4b9e41a54910ade20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -523,9 +523,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -796504641
+  m_SortingLayer: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1506644984, guid: 245b424aa37dd7c4b9e41a54910ade20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  angle: 45
+  angle: 121
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -856,8 +856,8 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 28.77935
-  m_PointLightOuterAngle: 44.43
+  m_PointLightInnerAngle: 103.59935
+  m_PointLightOuterAngle: 119.25
   m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 5.287319
   m_ShapeLightParametricSides: 5

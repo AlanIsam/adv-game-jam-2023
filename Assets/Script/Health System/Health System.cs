@@ -9,7 +9,7 @@ public class HealthSystem : MonoBehaviour
     public bool isDead;
     public GameObject deathscreen;
     public GameObject player;
-    public GameObject playerSFX;
+    public AudioSource playerSFX;
     public HealthBar healthBar;
     public int currentHealth;
 
@@ -31,7 +31,6 @@ public class HealthSystem : MonoBehaviour
             deathscreen.SetActive(true);
             Time.timeScale = 0;
             player.SetActive(false);
-            playerSFX.SetActive(false);
 
         }
     }
@@ -52,6 +51,7 @@ public class HealthSystem : MonoBehaviour
             if (currentHealth < 1)
             {
                 isDead = true;
+                playerSFX.Play();
 
             }
         }
@@ -76,7 +76,6 @@ public class HealthSystem : MonoBehaviour
         player.SetActive(true);
         deathscreen.SetActive(false);
         Time.timeScale = 1;
-        playerSFX.SetActive(false);
         currentHealth = life;
         healthBar.SetHealth(currentHealth);
 

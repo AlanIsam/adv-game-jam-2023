@@ -19,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
     public Animator myAnim;
 
     public bool isFacingLeft;
+    
+    public AudioSource walkingSFX;
+    
+    
 
 
     private void Update()
@@ -36,11 +40,12 @@ public class PlayerMovement : MonoBehaviour
            // myAnim.SetBool("Run", true);
         }
 
-        if (moving && (Vector2)transform.position != lastClickedPos)
+        if (moving && (Vector2)transform.position != lastClickedPos && Time.timeScale == 1 )
         {
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, lastClickedPos, step);
             myAnim.Play("Idle");
+            
             if (transform.position.x > lastClickedPos.x && !isFacingLeft)
             {
                 Flip();
@@ -55,6 +60,15 @@ public class PlayerMovement : MonoBehaviour
             moving = false;
            // myAnim.SetBool("Run", false);
            myAnim.Play("Run");
+        }
+        
+        if (moving)
+        {   if(!walkingSFX.isPlaying)
+            walkingSFX.Play();
+        }
+        else
+        {
+            walkingSFX.Stop();
         }
         
         
