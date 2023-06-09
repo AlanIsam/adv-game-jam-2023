@@ -6,7 +6,9 @@ public class WinTrigger : MonoBehaviour
 {
     [SerializeField] GameObject winScreen;
     public GameObject Player;
-    public GameObject PlayerAudio;
+    public AudioSource WinSound;
+    public AudioSource PlayerAudio;
+    public AudioSource gameSfx;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
@@ -14,7 +16,9 @@ public class WinTrigger : MonoBehaviour
             winScreen.SetActive(true);
             Time.timeScale = 0f;
             Player.SetActive(false);
-            PlayerAudio.SetActive(false);
+            PlayerAudio.Stop();
+            gameSfx.Stop();
+            WinSound.Play();
 
         }
     }

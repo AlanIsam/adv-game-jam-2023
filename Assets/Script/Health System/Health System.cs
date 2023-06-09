@@ -12,8 +12,13 @@ public class HealthSystem : MonoBehaviour
     public AudioSource playerSFX;
     public HealthBar healthBar;
     public int currentHealth;
+    public AudioSource gameSFX;
+    public AudioSource walkingSFX;
+    public bool canPickUpMedkit = true;
 
     public Vector3 respawnPoint;
+
+    public bool isFullHeal;
 
 
     private void Start()
@@ -21,7 +26,7 @@ public class HealthSystem : MonoBehaviour
         currentHealth = life;
         respawnPoint = player.transform.position;
         healthBar.SetMaxHealth(life);
-        
+
     }
 
     void Update()
@@ -31,8 +36,18 @@ public class HealthSystem : MonoBehaviour
             deathscreen.SetActive(true);
             Time.timeScale = 0;
             player.SetActive(false);
+            gameSFX.Stop();
+            walkingSFX.Stop();
 
         }
+
+
+
+    }
+
+    public bool IsFullHealth()
+    {
+        return currentHealth >= life;
     }
 
     public void TakeDamage(int damage)
@@ -43,10 +58,16 @@ public class HealthSystem : MonoBehaviour
             return;
         }
 
+        if (currentHealth == life)
+        {
+            isFullHeal = true;
+        }
+
         if (currentHealth >= 1)
         {
 
             currentHealth -= damage;
+            isFullHeal = false;
             healthBar.SetHealth(currentHealth);
             if (currentHealth < 1)
             {
@@ -55,8 +76,9 @@ public class HealthSystem : MonoBehaviour
 
             }
         }
+
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Respawn"))
@@ -65,7 +87,7 @@ public class HealthSystem : MonoBehaviour
         }
         else
         {
-            player.transform.position = respawnPoint;
+            return;
         }
     }
 
@@ -78,15 +100,21 @@ public class HealthSystem : MonoBehaviour
         Time.timeScale = 1;
         currentHealth = life;
         healthBar.SetHealth(currentHealth);
+        gameSFX.Play();
 
     }
-    
-    public void Heal(int heal)
+
+    public void Heal(int healAmount)
     {
         if (currentHealth < life)
         {
-            currentHealth += heal;
+            currentHealth += healAmount;
             healthBar.SetHealth(currentHealth);
+            if (currentHealth > life)
+            {
+                currentHealth = life;
+                healthBar.SetHealth(currentHealth);
+            }
         }
     }
 }
