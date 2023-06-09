@@ -80,4 +80,13 @@ public class HealthSystem : MonoBehaviour
         healthBar.SetHealth(currentHealth);
 
     }
+    
+    public void Heal(int heal)
+    {
+        if (currentHealth < life)
+        {
+            currentHealth += heal;
+            healthBar.SetHealth(currentHealth);
+        }
+    }
 }

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Medkit : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   public HealthSystem _heartsystem; 
+   
+   
+   private void OnTriggerEnter2D(Collider2D other)
+   {
+      if (other.CompareTag("Player") && !other.isTrigger)
+      {
+         _heartsystem.Heal(1);
+         Destroy(gameObject);
+      }
+   }
 }
