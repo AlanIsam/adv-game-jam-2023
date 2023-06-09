@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -13,23 +14,26 @@ public class PlayerMovement : MonoBehaviour
     private bool moving;
 
     private bool isClicked;
-    
+
     public Vector3 respawnPoint;
 
     public Animator myAnim;
 
     public bool isFacingLeft;
-    
+
     public AudioSource walkingSFX;
-    
-    
+
+
+
+
+
 
 
     private void Update()
     {
         PointMovement();
     }
-
+    
     private void PointMovement()
     {
         if (Input.GetMouseButtonDown(0))
@@ -37,15 +41,15 @@ public class PlayerMovement : MonoBehaviour
             //CreateDust();
             lastClickedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             moving = true;
-           // myAnim.SetBool("Run", true);
+            // myAnim.SetBool("Run", true);
         }
 
-        if (moving && (Vector2)transform.position != lastClickedPos && Time.timeScale == 1 )
+        if (moving && (Vector2)transform.position != lastClickedPos && Time.timeScale == 1)
         {
             float step = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, lastClickedPos, step);
             myAnim.Play("Idle");
-            
+
             if (transform.position.x > lastClickedPos.x && !isFacingLeft)
             {
                 Flip();
@@ -58,20 +62,23 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             moving = false;
-           // myAnim.SetBool("Run", false);
-           myAnim.Play("Run");
+            // myAnim.SetBool("Run", false);
+            myAnim.Play("Run");
         }
-        
+
         if (moving)
-        {   if(!walkingSFX.isPlaying)
-            walkingSFX.Play();
+        {
+            if (!walkingSFX.isPlaying)
+                walkingSFX.Play();
         }
         else
         {
             walkingSFX.Stop();
         }
-        
-        
+
+
+
+
 
     }
 
@@ -82,5 +89,21 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = currentScale;
         isFacingLeft = !isFacingLeft;
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Obstacle")
+        {
+            moving = false;
+        }
+        
+
+
+
+
     }
+
+}
+
+
+

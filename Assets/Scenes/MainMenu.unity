@@ -1594,7 +1594,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GAME NAME HERE
+  m_text: Prison Sneak Out!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 943687ee280cda149b7a012ffb2b2ebf, type: 2}
   m_sharedMaterial: {fileID: -6355896420329838617, guid: 943687ee280cda149b7a012ffb2b2ebf, type: 2}
